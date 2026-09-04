@@ -1,69 +1,59 @@
+import java.util.*;
 
-import java.util.Scanner;
-
-class Practical_1
+class practice_1
 {
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
-        
-        boolean run = true;
-        while (run){
-        System.out.println("\n");
-        System.out.print("Enter 0 to exit, any num to continue: ");
-        int z=sc.nextInt();
-        if(z==0)
+        try
         {
-            System.out.println("Exiting Program...");
-            break;
-        }
-
-        try 
-        {
-            System.out.print("Enter 1st number: ");
-            int a=sc.nextInt();
-            System.out.print("Enter Operator: ");
-            String o=sc.next();
-            System.out.print("Enter 2nd number: ");
-            int b=sc.nextInt();
-            System.out.print("Answer: ");
-        
-            switch (o) 
-            {
-                case "+" -> System.out.println(a+b);
-                case "-" -> System.out.println(a-b);
-                case "*" -> System.out.println(a*b);
-                case "/" -> 
+            System.out.print("hit '0' to stop & any number to continue: ");
+            boolean running=true;
+            while (running){
+                System.out.print("Continue?");
+                int i=sc.nextInt();
+                if(i==0){
+                    break;} 
+                System.out.print("Enter 1st number: ");
+                int a = sc.nextInt();
+                System.out.print("Enter Operator: ");
+                String o=sc.next();
+                System.out.print("Enter 2nd number: ");
+                int b = sc.nextInt();
+                System.out.println("Answer: ");
+                switch (o) 
                 {
-                    if(b==0)
-                    {
-                        System.out.println(a/b);
+                    case "+" -> System.out.println(a+b); 
+                    case "-" -> System.out.println(a-b);
+                    case "*" -> System.out.println(a*b);
+                    case "/" ->{
+                        if(b==0)
+                        {
+                            System.out.println("Cannot divisible by zero. ");
+                        }
+                        else;
+                        {
+                            System.out.println(a/b);
+                        }
                     }
-                    else;
-                    {
-                        System.out.println("Cannot divided by zero ");
+                    case "%" -> {
+                        if(b==0)
+                        {
+                            System.out.println("Cannot modulo by zero.");
+                        }
+                        else;
+                        {
+                            System.out.println(a%b);
+                        }
                     }
-                }
-                case "%" -> 
-                {
-                    if(b==0)
-                    {
-                    System.out.println(a%b);
-                    }
-                    else;
-                    {
-                        System.out.println("Cannot modulo by zero ");
-                    }
-                }
-                default -> 
-                {
-                    System.out.println("Enter proper inputs");
+                default -> System.out.println("Give suitable data");
                 }
             }
         }
-        catch (NumberFormatException e) 
+        catch (Exception e) 
         {
-            System.out.println("Invalid numeric input! Please enter valid numbers.");
-        }}
+            System.out.println("Give suitable inputs.");
+        }
     }
 }
+
