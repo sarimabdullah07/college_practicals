@@ -1,4 +1,5 @@
 # List of IDs
+
 id_list = [478292, 473429, 430492, 491203, 430204, 410931]
 print(id_list)
 # Linear search
@@ -32,3 +33,24 @@ while l <= h:
 else:
     print("ID not found")
 print("\n Time Complexity = O(log(n)).\n Space Complexity = O(1)")
+
+#fibonacci search
+set=[32,23,43,54,34,45,66,76,12,27]
+#sorting
+set.sort()
+print(set)
+#fabonacci series
+a, b = 1, 1
+c=[]
+for _ in range(30):
+    c.append(a)
+    a, b = b, a + b
+#c=fabonacci series
+d=len(set)
+#d=length of the array or list
+for z in c:
+    if d<=z:
+        break
+#fm = i
+print(c)
+print(z)
