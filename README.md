@@ -28,3 +28,7 @@ algorithms:
 * Bubble Sort: Sort the salaries using the bubble sort algorithm.
 After sorting the salaries, the program should display top five highest salaries in the company
 
+# JAVA practical 01.
+1. Implement a robust Java calculator program that captures user input dynamically,
+processes mathematical operations using conditional logic and looping constructs, and
+ensures efficient error handling.
