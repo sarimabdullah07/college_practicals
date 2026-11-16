@@ -1,87 +1,10 @@
 
-# Group C - Practical 2
-# Hash Table using Linear Probing
-
 SIZE = 10
-
 hash_table = [None] * SIZE
 DELETED = "DELETED"
 
-# Hash Function
-def hash_function(key):
-    return key % SIZE
-
-# Insert Operation
-def insert(key):
-    index = hash_function(key)
-    first_deleted = -1
-
-    for i in range(SIZE):
-        pos = (index + i) % SIZE
-
-        if hash_table[pos] == key:
-            print("Key Already Exists!")
-            return
-
-        if hash_table[pos] == DELETED and first_deleted == -1:
-            first_deleted = pos
-
-        elif hash_table[pos] is None:
-            if first_deleted != -1:
-                pos = first_deleted
-
-            hash_table[pos] = key
-            print("Key Inserted Successfully!")
-            return
-
-    if first_deleted != -1:
-        hash_table[first_deleted] = key
-        print("Key Inserted Successfully!")
-    else:
-        print("Hash Table is Full!")
-
-# Search Operation
-def search(key):
-    index = hash_function(key)
-
-    for i in range(SIZE):
-        pos = (index + i) % SIZE
-
-        if hash_table[pos] is None:
-            break
-
-        if hash_table[pos] == key:
-            print("Key Found at Position:", pos)
-            return
-
-    print("Key Not Found!")
-
-# Delete Operation
-def delete(key):
-    index = hash_function(key)
-
-    for i in range(SIZE):
-        pos = (index + i) % SIZE
-
-        if hash_table[pos] is None:
-            break
-
-        if hash_table[pos] == key:
-            hash_table[pos] = DELETED
-            print("Key Deleted Successfully!")
-            return
-
-    print("Key Not Found!")
-
-# Display Operation
-def display():
-    print("\nHash Table:")
-    for i in range(SIZE):
-        print(i, ":", hash_table[i])
-
-# Main Menu
 while True:
-    print("\n--- LINEAR PROBING ---")
+    print("\n--- HASH TABLE USING LINEAR PROBING ---")
     print("1. Insert")
     print("2. Search")
     print("3. Delete")
@@ -90,23 +13,81 @@ while True:
 
     choice = int(input("Enter your choice: "))
 
+    # INSERT
     if choice == 1:
         key = int(input("Enter Key: "))
-        insert(key)
+        index = key % SIZE
+        inserted = False
 
+        for i in range(SIZE):
+            pos = (index + i) % SIZE
+
+            if hash_table[pos] == key:
+                print("Key Already Exists!")
+                inserted = True
+                break
+
+            if hash_table[pos] == None or hash_table[pos] == DELETED:
+                hash_table[pos] = key
+                print("Key Inserted Successfully!")
+                inserted = True
+                break
+
+        if inserted == False:
+            print("Hash Table is Full!")
+
+    # SEARCH
     elif choice == 2:
         key = int(input("Enter Key to Search: "))
-        search(key)
+        index = key % SIZE
+        found = False
 
+        for i in range(SIZE):
+            pos = (index + i) % SIZE
+
+            if hash_table[pos] == None:
+                break
+
+            if hash_table[pos] == key:
+                print("Key Found at Position:", pos)
+                found = True
+                break
+
+        if found == False:
+            print("Key Not Found!")
+
+    # DELETE
     elif choice == 3:
         key = int(input("Enter Key to Delete: "))
-        delete(key)
+        index = key % SIZE
+        found = False
 
+        for i in range(SIZE):
+            pos = (index + i) % SIZE
+
+            if hash_table[pos] == None:
+                break
+
+            if hash_table[pos] == key:
+                hash_table[pos] = DELETED
+                print("Key Deleted Successfully!")
+                found = True
+                break
+
+        if found == False:
+            print("Key Not Found!")
+
+    # DISPLAY
     elif choice == 4:
-        display()
+        print("\nHash Table:")
+        for i in range(SIZE):
+            print(i, ":", hash_table[i])
 
+    # EXIT
     elif choice == 5:
+        print("Program Exited!")
         break
 
     else:
         print("Invalid Choice!")
+
