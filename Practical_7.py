@@ -2,11 +2,8 @@
 # Group D - Practical 1
 # BFS and DFS Graph Traversal
 
-from collections import deque
-
 vertices = ['A', 'B', 'C', 'D', 'E']
 
-# Adjacency Matrix for DFS
 matrix = [
     [0, 1, 1, 0, 0],
     [1, 0, 0, 1, 1],
@@ -15,7 +12,6 @@ matrix = [
     [0, 1, 1, 0, 0]
 ]
 
-# Adjacency List for BFS
 graph = {
     'A': ['B', 'C'],
     'B': ['A', 'D', 'E'],
@@ -24,49 +20,43 @@ graph = {
     'E': ['B', 'C']
 }
 
-# DFS using Adjacency Matrix
-def DFS(start):
-    visited = set()
+# DFS Traversal
+visited = set()
+stack = ['A']
 
-    def dfs_visit(vertex):
-        index = vertices.index(vertex)
+print("DFS Traversal:")
+
+while stack:
+    vertex = stack.pop()
+
+    if vertex not in visited:
+        print(vertex, end=" ")
         visited.add(vertex)
 
-        print(vertex, end=" ")
+        index = vertices.index(vertex)
 
-        for i in range(len(vertices)):
+        for i in range(len(vertices)-1, -1, -1):
             if matrix[index][i] == 1:
                 next_vertex = vertices[i]
 
                 if next_vertex not in visited:
-                    dfs_visit(next_vertex)
+                    stack.append(next_vertex)
 
-    dfs_visit(start)
+# BFS Traversal
+visited = set()
+queue = ['A']
 
-# BFS using Adjacency List
-def BFS(start):
-    visited = set()
-    queue = deque()
-
-    visited.add(start)
-    queue.append(start)
-
-    while queue:
-        vertex = queue.popleft()
-        print(vertex, end=" ")
-
-        for neighbour in graph[vertex]:
-            if neighbour not in visited:
-                visited.add(neighbour)
-                queue.append(neighbour)
-
-# Main Program
-print("Graph Vertices:", vertices)
-
-print("\nDFS Traversal:")
-DFS('A')
+visited.add('A')
 
 print("\n\nBFS Traversal:")
-BFS('A')
+
+while queue:
+    vertex = queue.pop(0)
+    print(vertex, end=" ")
+
+    for neighbour in graph[vertex]:
+        if neighbour not in visited:
+            visited.add(neighbour)
+            queue.append(neighbour)
 
 print()
